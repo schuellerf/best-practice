@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: PR title contains Jira ticket
-        run: if [[ "${{ github.event.pull_request.title }}" =~ "[A-Z]+-[0-9]+" ]]; then echo "PR Title contains a Jira ticket!"; fi
+        run: if [[ "${{ github.event.pull_request.title }}" =~ "[A-Z]+-[0-9]+" ]]; then echo "Well done!"; else echo "PR title should contain a Jira."; fi
         shell: bash
           #      - name: Commits contain Jira ticket
           #run:
           #shell: bash
       - name: PR description is not empty
-        run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; fi
+        run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; else echo "Well done!";  fi
