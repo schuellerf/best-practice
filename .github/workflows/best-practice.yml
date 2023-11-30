@@ -18,4 +18,4 @@ jobs:
           #run:
           #shell: bash
       - name: PR description is not empty
-        run: if [ -z "${{ github.event.pull_request.description }}" ]; then echo "The PR needs a non-empty description."; fi
+        run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; fi
