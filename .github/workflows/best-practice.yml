@@ -1,5 +1,4 @@
 name: "Best practice test"
-description: "Test whether a pull request matches our best practices"
 
 on:
   pull_request:
