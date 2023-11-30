@@ -15,7 +15,7 @@ jobs:
         shell: bash
       - name: Commits contain Jira ticket
         run: |
-          UNMERGED_COMMITS=$(git cherry -v "$GITHUB_BASE_REF" "$GITHUB_REF")
+          UNMERGED_COMMITS=$(git cherry -v "$GITHUB_BASE_REF" "${{ github.ref_name }}")
           while read line; do
             if [ -z $(grep -Eo "[A-Z][A-Z0-9]+-[0-9]+" <<< "$line") ]; then echo "Commit message '$line' should contain a Jira."; fi
           done < echo $UNMERGED_COMMITS
