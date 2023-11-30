@@ -3,8 +3,6 @@ description: "Test whether a pull request matches our best practices"
 
 on:
   pull_request:
-    types:
-      - opened
 
 jobs:
   jira-issue:
