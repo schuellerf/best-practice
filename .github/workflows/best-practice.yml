@@ -1,0 +1,21 @@
+name: "Best practice test"
+description: "Test whether a pull request matches our best practices"
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  jira-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: PR title contains Jira ticket
+        run: if [[ "${{ github.event.pull_request.title }}" =~ "[A-Z]+-[0-9]+" ]]; then echo "PR Title contains a Jira ticket!"; fi
+        shell: bash
+          #      - name: Commits contain Jira ticket
+          #run:
+          #shell: bash
+      - name: PR description is not empty
+        run: if [ -z "${{ github.event.pull_request.description }}" ]; then echo "The PR needs a non-empty description."; fi
