@@ -40,4 +40,4 @@ jobs:
           -X POST \
           -H "Content-Type: application/json" \
           -d "{\"labels\":[\"best-practice\"]}" \
-          "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.id }}/labels"
+          "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/labels"
