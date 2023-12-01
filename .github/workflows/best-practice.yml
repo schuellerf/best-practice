@@ -30,3 +30,7 @@ jobs:
         shell: bash
       - name: PR description is not empty
         run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; else echo "Well done!";  fi
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: best-practice
