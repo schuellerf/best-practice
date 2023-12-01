@@ -13,7 +13,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - run: |
+      - run: | # SMELL: this is a bit stupid, but apparently git rev-list needs it?
           git branch -a
           git checkout main
           git checkout readme
@@ -28,8 +28,8 @@ jobs:
             fi
           done <<< $(git rev-list main..readme --format="%s: %b" --no-commit-header)
         shell: bash
-      - name: PR description is not empty
-        run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; else echo "Well done!";  fi
+      - name: PR description is not empty (blocking)
+        run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; exit 1; else echo "Well done!";  fi
       - name: add label
         uses: actions-ecosystem/action-add-labels@v1
         with:
