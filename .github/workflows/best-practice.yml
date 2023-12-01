@@ -22,11 +22,11 @@ jobs:
         shell: bash
       - name: Commits contain Jira ticket
         run: |
-          echo $(git rev-list main..readme --format="%s: %b\n" --no-commit-header) > unmerged_commits
-          cat unmerged_commits
           while read line; do
-            if [ -z $(grep -Eo "[A-Z][A-Z0-9]+-[0-9]+" <<< "$line") ]; then echo "Commit message '$line' should contain a Jira."; fi
-          done < unmerged_commits
+            if [ -z $(grep -Eo "[A-Z][A-Z0-9]+-[0-9]+" <<< "$line") ] && [ -n "$line" ]; then
+              echo "Commit message '$line' should contain a Jira."
+            fi
+          done <<< $(git rev-list main..readme --format="%s: %b" --no-commit-header)
         shell: bash
       - name: PR description is not empty
         run: if [ -z "${{ github.event.pull_request.body}}" ]; then echo "The PR needs a non-empty description."; else echo "Well done!";  fi
